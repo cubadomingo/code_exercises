@@ -4,8 +4,7 @@
 require 'open-uri'
 
 class WordSequence
-
-  def self.retrieve_words(url)
+  def retrieve_words(url)
     words = []
     open(url) { |f|
       f.each_line { |line| words << line.tr("\n","") }
@@ -13,7 +12,7 @@ class WordSequence
     words
   end
 
-  def self.filter_words(array)
+  def filter_words(array)
     filtered_words = []
     array.each do |word|
       unless (word.length < 4 || word.include?(".") || word.include?("'") \
@@ -24,7 +23,7 @@ class WordSequence
     filtered_words
   end
 
-  def self.find_sequences(word_list)
+  def find_sequences(word_list)
     sequences = []
     words = []
     word_list.each do |word|
@@ -41,7 +40,7 @@ class WordSequence
     return sequences, words
   end
 
-  def self.send_to_file(sequences, words)
+  def send_to_file(sequences, words)
     sequences_file = File.new("sequences.txt", "w")
     words_file = File.new("words.txt", "w")
     sequences.each do |sequence|

@@ -2,13 +2,14 @@ require 'spec_helper'
 require 'word_sequence'
 
 RSpec.describe WordSequence do
+  sequence = WordSequence.new
 
   describe ".filter_words" do
     context "given an array of words" do
 
       it "filters characters that are not letters" do
         array = ["string", "hello", "U.S.A", "You'll", "10th"]
-        expect(WordSequence.filter_words(array)).to eq(["string", "hello"])
+        expect(sequence.filter_words(array)).to eq(["string", "hello"])
       end
     end
   end
@@ -17,7 +18,7 @@ RSpec.describe WordSequence do
     context "given an array of words" do
 
       array = ["arrows", "carrots", "give"]
-      sequences, words = WordSequence.find_sequences(array)
+      sequences, words = sequence.find_sequences(array)
 
       it "return sequences of four letters from each word" do
         expect(sequences).to eq(["arro", "rrow", "rows",
@@ -42,7 +43,7 @@ RSpec.describe WordSequence do
       words = ["arrows", "arrows", "arrows",
                "carrots", "carrots", "carrots",
                "give"]
-      WordSequence.send_to_file(sequences, words)
+      sequence.send_to_file(sequences, words)
 
       it "creates a new sequences.txt file with the sequences" do
         sequences_check = []
